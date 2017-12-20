@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.jjmproject.initialize.Initialize;
+import com.jjmproject.log.JLog;
 import com.jjmproject.utilities.NotificationUtility;
 
 import java.util.HashMap;
@@ -53,7 +54,8 @@ public class MainApplication extends RNApplication implements Initialize{
 
         // 初始化 Notification 工具类
         NotificationUtility.init(mContext);
-
+        // 初始化日志类
+        JLog.init();
 
 
 

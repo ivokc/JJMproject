@@ -5,6 +5,7 @@ import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
 import com.jjmproject.modules_and_widgets.modules.NotificationModule;
+import com.jjmproject.modules_and_widgets.modules.SplashScreenModule;
 import com.jjmproject.modules_and_widgets.modules.StatusBarModule;
 
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class RegisterPackages implements ReactPackage {
         List<NativeModule> modules = new ArrayList<>();
         modules.add(new NotificationModule(reactContext));
         modules.add(new StatusBarModule(reactContext));
+        modules.add(new SplashScreenModule(reactContext));
         return modules;
     }
 

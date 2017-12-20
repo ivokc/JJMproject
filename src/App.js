@@ -5,7 +5,7 @@
  * @Project: JJMproject
  * @Filename: App.js
  * @Last modified by:   jjm
- * @Last modified time: 2017-12-14T17:02:04+08:00
+ * @Last modified time: 2017-12-20T17:42:58+08:00
  */
 
 
@@ -24,8 +24,8 @@ import {
   View
 } from 'react-native';
 import './main/constant/Color';
+import './main/global/Just'
 import InitializeConfig from './main/initialize/InitializeConfig'
-
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -41,8 +41,14 @@ export default class JJMApp extends Component<{}> {
       InitializeConfig.setupAppConfiguration();
   }
 
+  componentDidMount() {
+
+     
+
+  }
+
   render() {
-    alert('aaaaaa');
+
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>

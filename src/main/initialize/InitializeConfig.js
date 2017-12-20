@@ -5,18 +5,17 @@
  * @Project: JJMproject
  * @Filename: InitializeConfig.js
  * @Last modified by:   jjm
- * @Last modified time: 2017-12-14T16:39:16+08:00
+ * @Last modified time: 2017-12-20T18:05:33+08:00
  */
 
-
- import StatusBarModule from '../native-modules/ui/StatusBarModule';
 
  const InitializeConfig = {
 
      setupAppConfiguration() {
 
          // 设置StatusBar颜色
-         StatusBarModule.setHexColor(Color.lightBlue);
+         // Just.setHexColor(Color.lightBlue);
+         Just.hideSplashScreen();
 
      }
 

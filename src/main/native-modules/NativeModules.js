@@ -4,10 +4,16 @@
  * @Email:  jijm@bosc.cn
  * @Project: JJMproject
  * @Filename: NativeModules.js
- * @Last modified by:   ivokc
- * @Last modified time: 2017-12-14T15:50:22+08:00
+ * @Last modified by:   jjm
+ * @Last modified time: 2017-12-20T18:02:16+08:00
  */
 
  import { NativeModules } from 'react-native';
 
- export default NativeModules;
+
+ //ui
+ export const StatusBarModule =  NativeModules.StatusBarModule;
+ export const SplashScreenModule =  NativeModules.SplashScreenModule;
+
+ //functional
+ export const JumpToNativeModule = NativeModules.JumpToNativeModule;

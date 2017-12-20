@@ -3,8 +3,13 @@ package com.jjmproject;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.facebook.react.ReactActivity;
+import com.jjmproject.initialize.Initialize;
+import com.jjmproject.utilities.SplashScreenUtility;
+import com.orhanobut.logger.Logger;
 
-public class MainActivity extends UIActivity {
+
+public class MainActivity extends ReactActivity implements Initialize {
 
     private static final String TAG = "xxxMainActivity";
 
@@ -14,29 +19,20 @@ public class MainActivity extends UIActivity {
      */
     @Override
     protected String getMainComponentName() {
-        Log.d(TAG, "getMainComponentName: ");
+        Logger.i("getMainComponentName");
         return "JJMproject";
     }
 
-
-
     @Override
-    public void setContentView() {
-        Log.d(TAG, "setContentView: ");
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initialize();
     }
 
-    @Override
-    public void initData() {
-        Log.d(TAG, "initData: ");
-    }
 
     @Override
-    public void initViews() {
+    public void initialize() {
 
-    }
-
-    @Override
-    public void setupViews() {
-
+        SplashScreenUtility.show(this);
     }
 }

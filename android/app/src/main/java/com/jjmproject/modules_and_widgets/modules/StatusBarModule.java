@@ -62,10 +62,13 @@ public class StatusBarModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void hideStatusBar() {
         UiThreadUtil.runOnUiThread(() -> {
-            View decorView = getCurrentActivity().getWindow().getDecorView();
-            // Hide the status bar.
-            int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
-            decorView.setSystemUiVisibility(uiOptions);
+            if (Build.VERSION.SDK_INT >= 21){
+                View decorView = getCurrentActivity().getWindow().getDecorView();
+                // Hide the status bar.
+                int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN|View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+                decorView.setSystemUiVisibility(uiOptions);
+                getCurrentActivity().getWindow().setStatusBarColor(Color.TRANSPARENT);
+            }
         });
     }
 
