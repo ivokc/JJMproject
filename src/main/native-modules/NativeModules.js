@@ -5,7 +5,7 @@
  * @Project: JJMproject
  * @Filename: NativeModules.js
  * @Last modified by:   jjm
- * @Last modified time: 2017-12-20T18:02:16+08:00
+ * @Last modified time: 2017-12-25T14:37:39+08:00
  */
 
  import { NativeModules } from 'react-native';
@@ -14,6 +14,8 @@
  //ui
  export const StatusBarModule =  NativeModules.StatusBarModule;
  export const SplashScreenModule =  NativeModules.SplashScreenModule;
+
+
 
  //functional
  export const JumpToNativeModule = NativeModules.JumpToNativeModule;

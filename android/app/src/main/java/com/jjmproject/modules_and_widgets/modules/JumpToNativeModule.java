@@ -10,9 +10,9 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.jjmproject.constants.Constant;
+import com.jjmproject.log.JLog;
 import com.jjmproject.util.DataUtil;
 import com.jjmproject.utilities.CameraUtility;
-import com.orhanobut.logger.Logger;
 
 import java.io.File;
 
@@ -49,7 +49,7 @@ public class JumpToNativeModule extends ReactContextBaseJavaModule {
     public void openCamera(String params, final Callback successCallback, final Callback failureCallback) {
         Activity currentActivity = getCurrentActivity();
         if (currentActivity != null) {
-            Logger.d("------>>>> " + params);
+            JLog.d("------>>>> " + params);
 
             mSuccessCallback = successCallback;
             mFailureCallback = failureCallback;
@@ -68,7 +68,7 @@ public class JumpToNativeModule extends ReactContextBaseJavaModule {
                     if (resultCode == Activity.RESULT_CANCELED){
                         mFailureCallback.invoke("failure");
                     }else if (resultCode == Activity.RESULT_OK){
-                        Logger.d("==== photoPath ====>>>>> " + PHOTO_PATH);
+                        JLog.d("==== photoPath ====>>>>> " + PHOTO_PATH);
                         String bitmapString = DataUtil.bitmapString(PHOTO_PATH);
                         mSuccessCallback.invoke(bitmapString);
                         mSuccessCallback = null;
