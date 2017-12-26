@@ -5,7 +5,7 @@
  * @Project: JJMproject
  * @Filename: App.js
  * @Last modified by:   jjm
- * @Last modified time: 2017-12-20T17:42:58+08:00
+ * @Last modified time: 2017-12-26T10:19:09+08:00
  */
 
 
@@ -24,8 +24,10 @@ import {
   View
 } from 'react-native';
 import './main/constant/Color';
-import './main/global/Just'
-import InitializeConfig from './main/initialize/InitializeConfig'
+import './main/constant/Constant'
+import './main/global/Just';
+import InitializeConfig from './main/initialize/InitializeConfig';
+import {Button} from './main/components/UIComponents';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -43,8 +45,10 @@ export default class JJMApp extends Component<{}> {
 
   componentDidMount() {
 
-     
+  }
 
+  handlePress(){
+      Just.openCamera('jjm');
   }
 
   render() {
@@ -59,7 +63,10 @@ export default class JJMApp extends Component<{}> {
         </Text>
         <Text style={styles.instructions}>
           {instructions}
-        </Text>
+      </Text>
+        <Button title='确认' disabled={false}  handlePress={this.handlePress} />
+
+
       </View>
     );
   }

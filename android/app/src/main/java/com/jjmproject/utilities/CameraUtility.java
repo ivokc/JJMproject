@@ -34,7 +34,14 @@ public class CameraUtility {
             File file = new File(dir, photoName);
             intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
             PHOTO_PATH = PHOTO_FILE_PATH + photoName;
-            ((Activity) context).startActivityForResult(intent, requestCode);
+
+
+
+
+            if (intent.resolveActivity(((Activity) context).getPackageManager()) != null) {
+                ((Activity) context).startActivityForResult(intent, requestCode);
+            }
+
         }).start();
     }
 }

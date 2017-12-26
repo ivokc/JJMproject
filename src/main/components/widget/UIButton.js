@@ -5,7 +5,7 @@
  * @Project: JJMproject
  * @Filename: UIButton.js
  * @Last modified by:   jjm
- * @Last modified time: 2017-12-20T15:44:36+08:00
+ * @Last modified time: 2017-12-26T10:13:01+08:00
  */
  import React, { PureComponent, PropTypes } from 'react';
  import {
@@ -16,17 +16,7 @@
      View
  } from 'react-native';
 
- const propTypes = {
-    positive: PropTypes.bool,
-    title: PropTypes.string,
-    underlayColor: PropTypes.string,
-    style: PropTypes.any,
-    titleStyle: PropTypes.any,
-    disabled: PropTypes.bool,
-    handlePress: PropTypes.func,
-    icon: PropTypes.any,
 
-};
 
 const defaultProps = {
     positive: true
@@ -69,7 +59,6 @@ export default class UIButton extends PureComponent {
     }
 }
 
-UIButton.propTypes = propTypes;
 UIButton.defaultProps = defaultProps;
 
 const styles = StyleSheet.create({
