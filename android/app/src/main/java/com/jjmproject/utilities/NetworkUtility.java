@@ -5,7 +5,21 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.telephony.TelephonyManager;
 
+import com.android.volley.DefaultRetryPolicy;
+
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.jjmproject.constants.Constant;
+import com.jjmproject.vendors.http.VolleySingleton;
+import com.jjmproject.vendors.log.OrhanobutLogger;
+import com.squareup.phrase.Phrase;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.Serializable;
 import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -24,12 +38,57 @@ import java.util.Enumeration;
 public class NetworkUtility {
 
     private static Context mContext;
+    private static VolleySingleton mVolleySingleton;
+
+
 
 
 
     public static void init(Context Context){
+
         mContext = Context;
+        mVolleySingleton = VolleySingleton.getInstance(Context);
+
     }
+
+    //请求成功回调接口
+    public interface NetworkSuccessCallback extends Serializable {
+        public void onSuccess(String responseString);
+    }
+
+    //请求失败回调接口
+    public interface NetworkFailureCallback extends Serializable {
+        public void onFailure(VolleyError error);
+    }
+
+
+
+
+
+    public static void sendRequest(String url, String paramsString ,NetworkSuccessCallback successCallback,NetworkFailureCallback failureCallback){
+        try {
+            JSONObject params = new JSONObject(paramsString);
+            LogUtility.d(Phrase.from("=== {url} ====>>>>> {params}").put("url", url).put("params", paramsString).format().toString());
+            mVolleySingleton.addToRequestQueue(new JsonObjectRequest(url, "{}".equals(paramsString) ? null : params,
+                response ->  {
+                    // 组装成功返回数据
+                    LogUtility.d(Phrase.from("=== success === url ====>>>>> {url}").put("url", url).format().toString());
+                    LogUtility.json(Phrase.from("{response}").put("response", response.toString()).format().toString());
+                    successCallback.onSuccess(response.toString());
+                }, error -> {
+                    failureCallback.onFailure(error);
+                }
+            ).setRetryPolicy(new DefaultRetryPolicy(Constant.DEFAULT_NETWORK_TIMEOUT,Constant.MAX_NUM_RETRIES,1.0f)));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+
+
 
     /**
      * 获取 Mac 地址
@@ -80,4 +139,28 @@ public class NetworkUtility {
         NetworkInfo networkINfo = cm.getActiveNetworkInfo();
         return networkINfo != null && networkINfo.getType() == ConnectivityManager.TYPE_MOBILE;
     }
+
+
+
+    public static boolean isNetworkConnected() {
+        if (mContext != null) {
+            ConnectivityManager mConnectivityManager = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo mNetworkInfo = mConnectivityManager.getActiveNetworkInfo();
+            if (mNetworkInfo != null) {
+                return mNetworkInfo.isAvailable();
+            }
+        }
+        return false;
+    }
+
+    public static boolean isWifiEnabled() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        TelephonyManager telephonyManager = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
+        return ((connectivityManager.getActiveNetworkInfo() != null
+                && connectivityManager.getActiveNetworkInfo().getState() == NetworkInfo.State.CONNECTED)
+                || telephonyManager.getNetworkType() == TelephonyManager.NETWORK_TYPE_UMTS);
+    }
+
+
+
 }

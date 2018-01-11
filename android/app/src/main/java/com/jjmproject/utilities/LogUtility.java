@@ -1,33 +1,25 @@
-package com.jjmproject.log;
+package com.jjmproject.utilities;
 
 import com.jjmproject.constants.Constant;
-import com.orhanobut.logger.AndroidLogAdapter;
-import com.orhanobut.logger.BuildConfig;
+import com.jjmproject.vendors.log.OrhanobutLogger;
 import com.orhanobut.logger.Logger;
 
 /**
- * package: com.jjmproject.log
+ * package: com.jjmproject.utilities
  * author: ivokc
  * email: jijm@bosc.cn
  * github: https://github.com/ivokc
- * date: 2017/12/18
+ * date: 2018/1/11
  * desc:
  */
 
-public class JLog {
-
-
+public class LogUtility {
 
     public static void init(){
-        Logger.addLogAdapter(new AndroidLogAdapter(){
-            @Override
-            public boolean isLoggable(int priority, String tag) {
-                return Constant.IS_DEBUG;
-            }
-        });
+        OrhanobutLogger.init(Constant.IS_DEBUG);
     }
 
-
+    /*OrhanobutLogger start*/
     public static void d(String message, Object... args) {
         Logger.d(message, args);
     }
@@ -78,6 +70,7 @@ public class JLog {
     public static void xml(String xml) {
         Logger.xml(xml);
     }
+    /*OrhanobutLogger end*/
 
 
 }

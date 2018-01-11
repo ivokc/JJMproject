@@ -13,9 +13,14 @@
     <style name="SplashScreen_SplashTheme" parent="AppTheme">
         <item name="android:windowAnimationStyle">@style/SplashScreen_SplashAnimation</item>
     </style>
+
     <style name="SplashScreen_Fullscreen" parent="SplashScreen_SplashTheme">
         <item name="android:windowFullscreen">true</item>
     </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
     <!-- 启动页 end -->
 
 </resources>

@@ -5,7 +5,7 @@
  * @Project: JJMproject
  * @Filename: NativeUtility.js
  * @Last modified by:   jjm
- * @Last modified time: 2017-12-20T17:50:18+08:00
+ * @Last modified time: 2017-12-28T14:06:20+08:00
  */
 import {JumpToNativeModule} from '../../native-modules/NativeModules';
 

@@ -4,11 +4,15 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
 
 import java.io.File;
-
-import static com.jjmproject.constants.Constant.PHOTO_FILE_PATH;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * package: com.jjmproject.utilities
@@ -24,24 +28,35 @@ public class CameraUtility {
     public static String PHOTO_PATH = "";
 
     public static void openCamera(Context context, int requestCode) {
-        new Thread(() -> {
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            File dir = new File(PHOTO_FILE_PATH);
-            if (!dir.exists()) {
-                dir.mkdirs();
+//        new Thread(() -> {
+            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            // Ensure that there's a camera activity to handle the intent
+            if (takePictureIntent.resolveActivity(context.getPackageManager()) != null) {
+                // 包名下缓存路径建图片
+                File outputImage = new File(context.getExternalCacheDir(),"output_image.jpg");
+                PHOTO_PATH = outputImage.getAbsolutePath();
+                try {
+                    if (outputImage.exists()){
+                        outputImage.delete();
+                    }
+                    outputImage.createNewFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                Uri photoURI;
+                if (Build.VERSION.SDK_INT >= 24){
+                    photoURI = FileProvider.getUriForFile(context,
+                            "com.jjmproject.fileprovider",
+                            outputImage);
+                }else {
+                    photoURI = Uri.fromFile(outputImage);
+                }
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                ((Activity) context).startActivityForResult(takePictureIntent, requestCode);
             }
-            String photoName = System.currentTimeMillis() + ".png";
-            File file = new File(dir, photoName);
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
-            PHOTO_PATH = PHOTO_FILE_PATH + photoName;
 
-
-
-
-            if (intent.resolveActivity(((Activity) context).getPackageManager()) != null) {
-                ((Activity) context).startActivityForResult(intent, requestCode);
-            }
-
-        }).start();
+//        }).start();
     }
+
+
 }

@@ -14,16 +14,18 @@ import java.text.SimpleDateFormat;
  */
 
 public class Constant {
-
+    /* 日志开关 */
     public static final boolean IS_DEBUG = true;
+    /* 请求超时时间 */
+    public static final int DEFAULT_NETWORK_TIMEOUT = 1000 * 60 * 2;
+    /* 超时后, 重发次数 */
+    public static int MAX_NUM_RETRIES = 0;
 
-    /* 拍照存储路径 */
-    public static final String PHOTO_FILE_PATH = Environment.getExternalStorageDirectory().getPath() + "/JJMproject/photos/";
     /* 图片质量 */
     public static final int PHOTO_QUALITY = 10;
 
     /* 相机 request code */
-    public static int CAMERA_REQUEST_CODE = 123;
+    public static final int CAMERA_REQUEST_CODE = 123;
 
 
 

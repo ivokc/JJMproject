@@ -19,7 +19,6 @@ public class MainActivity extends ReactActivity implements Initialize {
      */
     @Override
     protected String getMainComponentName() {
-        Logger.i("getMainComponentName");
         return "JJMproject";
     }
 
@@ -28,6 +27,7 @@ public class MainActivity extends ReactActivity implements Initialize {
         super.onCreate(savedInstanceState);
         initialize();
     }
+
 
 
     @Override

@@ -5,7 +5,7 @@
  * @Project: JJMproject
  * @Filename: App.js
  * @Last modified by:   jjm
- * @Last modified time: 2017-12-26T10:19:09+08:00
+ * @Last modified time: 2017-12-28T14:06:13+08:00
  */
 
 
@@ -48,7 +48,11 @@ export default class JJMApp extends Component<{}> {
   }
 
   handlePress(){
-      Just.openCamera('jjm');
+      Just.openCamera('jjm').then((response)=>{
+          console.log('handlePress',response);
+      }).catch((error) =>{
+          console.log('handlePress',error);
+      });
   }
 
   render() {

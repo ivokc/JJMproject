@@ -10,11 +10,9 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.jjmproject.constants.Constant;
-import com.jjmproject.log.JLog;
-import com.jjmproject.util.DataUtil;
+import com.jjmproject.vendors.log.OrhanobutLogger;
+import com.jjmproject.utilities.DataUtility;
 import com.jjmproject.utilities.CameraUtility;
-
-import java.io.File;
 
 import static com.jjmproject.utilities.CameraUtility.PHOTO_PATH;
 
@@ -49,7 +47,7 @@ public class JumpToNativeModule extends ReactContextBaseJavaModule {
     public void openCamera(String params, final Callback successCallback, final Callback failureCallback) {
         Activity currentActivity = getCurrentActivity();
         if (currentActivity != null) {
-            JLog.d("------>>>> " + params);
+            OrhanobutLogger.d("------>>>> " + params);
 
             mSuccessCallback = successCallback;
             mFailureCallback = failureCallback;
@@ -66,14 +64,15 @@ public class JumpToNativeModule extends ReactContextBaseJavaModule {
             if (requestCode == Constant.CAMERA_REQUEST_CODE){
                 if (mSuccessCallback != null && mFailureCallback != null){
                     if (resultCode == Activity.RESULT_CANCELED){
+                        OrhanobutLogger.d("==== photoPath ====>>>>> " + "canceled");
                         mFailureCallback.invoke("failure");
+                        mFailureCallback = null;
                     }else if (resultCode == Activity.RESULT_OK){
-                        JLog.d("==== photoPath ====>>>>> " + PHOTO_PATH);
-                        String bitmapString = DataUtil.bitmapString(PHOTO_PATH);
+                        OrhanobutLogger.d("==== photoPath ====>>>>> " + PHOTO_PATH);
+                        String bitmapString = DataUtility.bitmapString(PHOTO_PATH);
                         mSuccessCallback.invoke(bitmapString);
                         mSuccessCallback = null;
-                        File photoFile = new File(PHOTO_PATH);
-                        photoFile.delete();
+
                     }
                 }
             }
