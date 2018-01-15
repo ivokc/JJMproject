@@ -5,9 +5,10 @@
  * @Project: JJMproject
  * @Filename: Constant.js
  * @Last modified by:   jjm
- * @Last modified time: 2017-12-20T15:50:27+08:00
+ * @Last modified time: 2018-01-15T18:56:48+08:00
  */
 
 global.Constant = {
-    buttonFontSize: 18
+    isDebug: true
+    buttonFontSize: 18,
 }

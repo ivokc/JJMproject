@@ -51,14 +51,6 @@ public class NetworkModule extends ReactContextBaseJavaModule {
 
 
 
-
-
-
-
-
-
-
-
 //    @ReactMethod
 //    public void networkStatus(Callback callback) {
 //        callback.invoke(NetworkUtility.networkStatus());

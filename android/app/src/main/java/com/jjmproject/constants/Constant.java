@@ -14,6 +14,10 @@ import java.text.SimpleDateFormat;
  */
 
 public class Constant {
+
+    public static final String appName = "JJMproject";
+
+
     /* 日志开关 */
     public static final boolean IS_DEBUG = true;
     /* 请求超时时间 */
@@ -32,6 +36,9 @@ public class Constant {
     /* 日志文件名称格式 */
     public static final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     public static final SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+
+    /* 本地崩溃日志路径 */
+    public static final String CRASH_REPORTER_PATH = Environment.getExternalStorageDirectory().getPath() + "/" + appName + "/";
 
 
 

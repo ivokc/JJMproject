@@ -5,6 +5,8 @@ import android.util.Log;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.jjmproject.initialize.Initialize;
+import com.jjmproject.utilities.ImageCacheUtility;
+import com.jjmproject.utilities.LogUtility;
 import com.jjmproject.utilities.NetworkUtility;
 import com.jjmproject.vendors.log.OrhanobutLogger;
 import com.jjmproject.utilities.NotificationUtility;
@@ -56,9 +58,13 @@ public class MainApplication extends RNApplication implements Initialize{
         // 初始化 Notification 工具类
         NotificationUtility.init(mContext);
         // 初始化日志类
-        OrhanobutLogger.init();
+        LogUtility.init();
         // 初始化 Network 工具类
         NetworkUtility.init(mContext);
+        // 初始化 图片缓存 工具类
+        ImageCacheUtility.init(mContext);
+
+
 
     }
 
