@@ -1,4 +1,4 @@
-package com.framework.modules_and_widgets.modules;
+package com.jjmproject.modules_and_widgets.modules;
 
 import android.app.Activity;
 import android.app.Dialog;

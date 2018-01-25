@@ -5,32 +5,22 @@
  * @Project: JJMproject
  * @Filename: NetworkUtility.js
  * @Last modified by:   jjm
- * @Last modified time: 2018-01-15T18:59:38+08:00
+ * @Last modified time: 2018-01-23T16:35:01+08:00
  */
- import {NetworkModule} from '../../native-modules/NativeModules';
+import { Platform } from 'react-native';
+import { NetworkModule } from '../../native-modules/NativeModules';
 
- const NetworkUtility = {
+const NetworkUtility = {
 
+  sendRequest(url, params = {}) {
+    if (Platform.OS === 'android') {
+        return NetworkModule.sendRequest(url, params);
+
+    } else {
+        return NetworkModule.sendRequest(url, params, headers);
+    }
+  }
 
 };
 
-/**
- * 网络请求: Callback形式
- */
-function sendSilenceRequest(subUrl, params, resendRequest, errorMessage, silence, successCallback, failureCallback) {
-    let url = Constant.baseURL + subUrl;
-    const parameters = toString(params);
-    DebugUtility.log(`==== url ====>>>>> ${url}`);
-    DebugUtility.log(`==== params ====>>>>> ${parameters}`);
-    NetworkModule.sendRequest(url, parameters, (result) => {
-        responseHandler(result, silence, (response) => {
-            successCallback(response.bsadata);
-        }, (response) => {
-            failureHandler(response, subUrl, params, resendRequest, errorMessage, silence, successCallback, failureCallback);
-        });
-    }, (error) => {
-        DialogUtility.dismissLoading();
-        exceptionHandler(error, failureCallback, silence, params);
-    });
-}
 export default NetworkUtility;

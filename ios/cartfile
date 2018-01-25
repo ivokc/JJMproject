@@ -1,0 +1,10 @@
+
+github "Alamofire/Alamofire"
+github "duemunk/Async"
+github "ReactiveX/RxSwift"
+github "SnapKit/SnapKit"
+github "onevcat/Kingfisher"
+github "marmelroy/Zip"
+github "alibaba/HandyJSON"
+github "Ekhoo/Device"
+# github "Haneke/HanekeSwift"

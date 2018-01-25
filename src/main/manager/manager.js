@@ -5,20 +5,25 @@
  * @Project: JJMproject
  * @Filename: manager.js
  * @Last modified by:   jjm
- * @Last modified time: 2018-01-15T18:50:14+08:00
+ * @Last modified time: 2018-01-22T17:52:52+08:00
  */
 
- import NativeUtility from '../utilities/native/NativeUtility';
- import SplashScreenUtility from '../utilities/ui/SplashScreenUtility';
- import StatusBarUtility from '../utilities/ui/StatusBarUtility';
- import DialogUtility from '../utilities/ui/DialogUtility';
- import NetworkUtility from '../utilities/ui/NetworkUtility';
-
+import NativeUtility from '../utilities/native/NativeUtility';
+import SplashScreenUtility from '../utilities/ui/SplashScreenUtility';
+import StatusBarUtility from '../utilities/ui/StatusBarUtility';
+import DialogUtility from '../utilities/ui/DialogUtility';
+import NetworkUtility from '../utilities/data/NetworkUtility';
+import DBUtility from '../utilities/data/DBUtility';
+import JSONUtility from '../utilities/data/JSONUtility';
+import DebugUtility from '../utilities/other/DebugUtility';
 
 //functional
 export const NativeManager = {
   ...NativeUtility,
-  ...NetworkUtility
+  ...NetworkUtility,
+  ...DBUtility,
+  ...JSONUtility,
+  ...DebugUtility
 };
 
 

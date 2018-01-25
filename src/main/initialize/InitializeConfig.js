@@ -16,7 +16,7 @@
          // 设置StatusBar颜色rr
          // Just.setHexColor(Color.lightBlue);
          Just.hideSplashScreen();
-         alert('ddd');
+         // alert('ddd');
      }
 
  };

@@ -25,8 +25,7 @@ public class Constant {
     /* 超时后, 重发次数 */
     public static int MAX_NUM_RETRIES = 0;
 
-    /* 图片质量 */
-    public static final int PHOTO_QUALITY = 10;
+
 
     /* 相机 request code */
     public static final int CAMERA_REQUEST_CODE = 123;

@@ -13,6 +13,8 @@ import com.jjmproject.modules_and_widgets.RegisterPackages;
 import java.util.Arrays;
 import java.util.List;
 
+import io.realm.react.RealmReactPackage;
+
 public class RNApplication extends Application implements ReactApplication {
 
     private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
@@ -24,9 +26,9 @@ public class RNApplication extends Application implements ReactApplication {
         @Override
         protected List<ReactPackage> getPackages() {
             return Arrays.<ReactPackage>asList(
+                new RealmReactPackage(),
                 new MainReactPackage(),
                 new RegisterPackages()
-
             );
         }
 

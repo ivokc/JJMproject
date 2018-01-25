@@ -2,7 +2,10 @@ package com.jjmproject.modules_and_widgets.modules;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
+import com.facebook.react.bridge.ReactMethod;
+import com.jjmproject.MainActivity;
 import com.jjmproject.R;
+import com.jjmproject.utilities.LogUtility;
 import com.jjmproject.utilities.NotificationUtility;
 
 /**
@@ -24,10 +27,15 @@ public class NotificationModule extends ReactContextBaseJavaModule {
     public String getName() {
         return "NotificationModule";
     }
-
+    /**
+     * 弹出消息通知
+     */
+    @ReactMethod
     public void showNotification (String title, String message, String activityName){
         try {
-            NotificationUtility.showNotification(R.mipmap.ic_launcher, title, message, Class.forName(activityName));
+            LogUtility.i("activityname" ,activityName);
+            Class activity = activityName.equals("this") ? getCurrentActivity().getClass() : Class.forName(activityName);
+            NotificationUtility.showNotification(R.mipmap.ic_launcher, title, message, activity);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }

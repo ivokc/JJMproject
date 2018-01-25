@@ -7,17 +7,21 @@
  * @Last modified by:   jjm
  * @Last modified time: 2017-12-20T18:02:07+08:00
  */
-
+import { Platform } from 'react-native';
 import {SplashScreenModule} from '../../native-modules/NativeModules';
 
 export default SplashScreenUtility = {
 
     hideSplashScreen() {
-        SplashScreenModule.hideSplashScreen();
+        if (Platform.OS === 'android') {
+            SplashScreenModule.hideSplashScreen();
+        }
     },
 
     showSplashScreen() {
-        SplashScreenModule.showSplashScreen();
+        if (Platform.OS === 'android') {
+            SplashScreenModule.showSplashScreen();
+        }
     }
 
 };

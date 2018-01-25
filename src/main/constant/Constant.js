@@ -9,6 +9,6 @@
  */
 
 global.Constant = {
-    isDebug: true
+    isDebug: true,
     buttonFontSize: 18,
 }

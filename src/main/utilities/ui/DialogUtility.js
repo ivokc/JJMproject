@@ -7,23 +7,36 @@
  * @Last modified by:   jjm
  * @Last modified time: 2018-01-15T18:39:54+08:00
  */
- import {DialogModule} from '../../native-modules/NativeModules';
+import { Platform } from 'react-native';
+import { DialogModule, ProgressBarModule } from '../../native-modules/NativeModules';
 
  const DialogUtility = {
 
      showLoading(message) {
         if (message) {
-            DialogModule.showLoadingWithMessageAndCancelable(message, false);
+            if (Platform.OS === 'android') {
+                DialogModule.showLoadingWithMessageAndCancelable(message, false);
+            } else {
+                ProgressBarModule.showWithMessage(message);
+            }
         } else {
-            DialogModule.showLoadingWithCancelable(false);
+            if (Platform.OS === 'android') {
+                DialogModule.showLoadingWithCancelable(false);
+            } else {
+                ProgressBarModule.show();
+            }
         }
     },
 
     dismissLoading() {
-        DialogModule.dismissLoading();
+        if (Platform.OS === 'android') {
+            DialogModule.dismissLoading();
+        } else {
+            ProgressBarModule.dismiss();
+        }
     },
 
-    showSuccess(message, positiveAction, negativeAction) {
+    showSuccess(message, positiveAction = () => {}, negativeAction) {
         if (negativeAction) {
             DialogModule.showSuccessWithActions(message, false, '确定', '取消', positiveAction, negativeAction);
         } else {
@@ -31,7 +44,7 @@
         }
     },
 
-    showSuccessWithButtonsTitle(message, positiveAction, negativeAction, buttonTexts = [ '是', '否' ]) {
+    showSuccessWithButtonsTitle(message, positiveAction = () => {}, negativeAction, buttonTexts = [ '是', '否' ]) {
         if (negativeAction) {
             DialogModule.showSuccessWithActions(message, false, buttonTexts[0], buttonTexts[1], positiveAction, negativeAction);
         } else {
@@ -40,10 +53,14 @@
     },
 
     dismissSuccess() {
-        DialogModule.dismissSuccess();
+        if (Platform.OS === 'android') {
+            DialogModule.dismissSuccess();
+        } else {
+            DialogModule.dismiss();
+        }
     },
 
-    showMessage(message, positiveAction, negativeAction) {
+    showMessage(message, positiveAction = () => {}, negativeAction) {
         if (negativeAction) {
             DialogModule.showMessageWithActions(message, false, '确定', '取消', positiveAction, negativeAction);
         } else {
@@ -51,7 +68,7 @@
         }
     },
 
-    showMessageWithButtonsTitle(message, positiveAction, negativeAction, buttonTexts = [ '是', '否' ]) {
+    showMessageWithButtonsTitle(message, positiveAction = () => {}, negativeAction, buttonTexts = [ '是', '否' ]) {
         if (negativeAction) {
             DialogModule.showMessageWithActions(message, false, buttonTexts[0], buttonTexts[1], positiveAction, negativeAction);
         } else {
@@ -60,10 +77,14 @@
     },
 
     dismissMessage() {
-        DialogModule.dismissMessage();
+        if (Platform.OS === 'android') {
+            DialogModule.dismissMessage();
+        } else {
+            DialogModule.dismiss();
+        }
     },
 
-    showFailure(message, positiveAction, negativeAction) {
+    showFailure(message, positiveAction = () => {}, negativeAction) {
         if (negativeAction) {
             DialogModule.showFailureWithActions(message, false, '确定', '取消', positiveAction, negativeAction);
         } else {
@@ -71,7 +92,7 @@
         }
     },
 
-    showFailureResend(message, positiveAction, negativeAction, buttonTexts = [ '是', '否' ]) {
+    showFailureWithButtonsTitle(message, positiveAction = () => {}, negativeAction, buttonTexts = [ '是', '否' ]) {
         if (negativeAction) {
             DialogModule.showFailureWithActions(message, false, buttonTexts[0], buttonTexts[1], positiveAction, negativeAction);
         } else {
@@ -80,7 +101,11 @@
     },
 
     dismissFailure() {
-        DialogModule.dismissFailure();
+        if (Platform.OS === 'android') {
+            DialogModule.dismissFailure();
+        } else {
+            DialogModule.dismiss();
+        }
     }
 };
 

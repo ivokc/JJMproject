@@ -67,13 +67,13 @@ public class DataUtility {
     }
     /*日期时间end*/
     /*图片数据start*/
-    public final static String bitmapString(String photoPath) {
+    public final static String bitmapString(String photoPath,int quality) {
         String result = null;
         FileInputStream fis = null;
         try {
             fis = new FileInputStream(photoPath);
             Bitmap bitmap = BitmapFactory.decodeStream(fis);
-            result = bitmapToBase64(bitmap);
+            result = bitmapToBase64(bitmap,quality);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } finally {
@@ -87,14 +87,14 @@ public class DataUtility {
         return result;
     }
 
-    public final static String bitmapToBase64(Bitmap bitmap) {
+    public final static String bitmapToBase64(Bitmap bitmap,int quailty) {
 
         String result = null;
         ByteArrayOutputStream baos = null;
         try {
             if (bitmap != null) {
                 baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, Constant.PHOTO_QUALITY, baos);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, quailty, baos);
 
                 baos.flush();
                 baos.close();

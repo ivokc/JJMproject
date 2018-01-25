@@ -8,9 +8,16 @@
  */
 
 #import <UIKit/UIKit.h>
+#import <BMKLocationkit/BMKLocationComponent.h>
+#import <BMKLocationkit/BMKLocationAuth.h>
+
+typedef void (^LocationCompletionBlock)(BMKLocation * _Nullable location, BMKLocationNetworkState state, NSError * _Nullable error);
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
-@property (nonatomic, strong) UIWindow *window;
+@property (nonatomic, strong) UIWindow * _Nullable window;
+
+- (void)requestLocationWithBlock:(LocationCompletionBlock _Nullable)completionBlock;
+- (void)stopLocation;
 
 @end

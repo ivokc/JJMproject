@@ -24,10 +24,13 @@ import java.util.Date;
  */
 
 public class CameraUtility {
-
+    /* 图片路径 */
     public static String PHOTO_PATH = "";
+    /* 图片质量 */
+    public static int PHOTO_QUALITY = 10;
 
-    public static void openCamera(Context context, int requestCode) {
+    public static void openCamera(Context context,int photoQuality, int requestCode) throws IOException {
+        PHOTO_QUALITY = photoQuality;
 //        new Thread(() -> {
             Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             // Ensure that there's a camera activity to handle the intent
@@ -35,14 +38,11 @@ public class CameraUtility {
                 // 包名下缓存路径建图片
                 File outputImage = new File(context.getExternalCacheDir(),"output_image.jpg");
                 PHOTO_PATH = outputImage.getAbsolutePath();
-                try {
-                    if (outputImage.exists()){
-                        outputImage.delete();
-                    }
-                    outputImage.createNewFile();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                if (outputImage.exists()){
+                    outputImage.delete();
                 }
+                outputImage.createNewFile();
+
                 Uri photoURI;
                 if (Build.VERSION.SDK_INT >= 24){
                     photoURI = FileProvider.getUriForFile(context,

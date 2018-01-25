@@ -9,13 +9,18 @@ import android.telephony.TelephonyManager;
 
 import com.android.volley.DefaultRetryPolicy;
 
+import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.JsonRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.jjmproject.constants.Constant;
 import com.jjmproject.vendors.http.VolleySingleton;
 import com.jjmproject.vendors.log.OrhanobutLogger;
 import com.squareup.phrase.Phrase;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -68,17 +73,18 @@ public class NetworkUtility {
     public static void sendRequest(String url, String paramsString ,NetworkSuccessCallback successCallback,NetworkFailureCallback failureCallback){
         try {
             JSONObject params = new JSONObject(paramsString);
-            LogUtility.d(Phrase.from("=== {url} ====>>>>> {params}").put("url", url).put("params", paramsString).format().toString());
+            LogUtility.i(Phrase.from("=== {url} ====>>>>> {params}").put("url", url).put("params", paramsString).format().toString());
             mVolleySingleton.addToRequestQueue(new JsonObjectRequest(url, "{}".equals(paramsString) ? null : params,
                 response ->  {
                     // 组装成功返回数据
-                    LogUtility.d(Phrase.from("=== success === url ====>>>>> {url}").put("url", url).format().toString());
+                    LogUtility.i(Phrase.from("=== success === url ====>>>>> {url}").put("url", url).format().toString());
                     LogUtility.json(Phrase.from("{response}").put("response", response.toString()).format().toString());
                     successCallback.onSuccess(response.toString());
                 }, error -> {
                     failureCallback.onFailure(error);
                 }
             ).setRetryPolicy(new DefaultRetryPolicy(Constant.DEFAULT_NETWORK_TIMEOUT,Constant.MAX_NUM_RETRIES,1.0f)));
+
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -47,7 +47,7 @@ export default class UIButton extends PureComponent {
                 underlayColor={this.props.underlayColor ? this.props.underlayColor : (this.props.positive ? Color.darkBlue : Color.darkGray)}
                 style={[this.props.positive ? styles.buttonStyle : styles.negativeButtonStyle, this.props.style, this.props.disabled ? styles.disabledStyle : {opacity: 1}]}
                 disabled={this.props.disabled}
-                onPress={this.props.handlePress}>
+                onPress={this.props.onPress}>
                 <View style={styles.rowStyle}>
                     {icon}
                     <Text style={[styles.text, this.props.titleStyle]}>

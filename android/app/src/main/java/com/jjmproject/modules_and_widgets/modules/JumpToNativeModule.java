@@ -6,17 +6,24 @@ import android.content.Intent;
 import com.facebook.react.bridge.ActivityEventListener;
 import com.facebook.react.bridge.BaseActivityEventListener;
 import com.facebook.react.bridge.Callback;
+import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.ReadableMap;
 import com.jjmproject.constants.Constant;
 import com.jjmproject.utilities.LogUtility;
 import com.jjmproject.vendors.log.OrhanobutLogger;
 import com.jjmproject.utilities.DataUtility;
 import com.jjmproject.utilities.CameraUtility;
 
+import org.json.JSONObject;
+
+import java.io.IOException;
+
 import static android.app.Activity.RESULT_OK;
 import static com.jjmproject.utilities.CameraUtility.PHOTO_PATH;
+import static com.jjmproject.utilities.CameraUtility.PHOTO_QUALITY;
 
 /**
  * package: com.jjmproject.modules_and_widgets.modules
@@ -31,8 +38,13 @@ public class JumpToNativeModule extends ReactContextBaseJavaModule {
 
     private static int ACTIVITY_REQUEST_CODE = 100;
 
-    private Callback mSuccessCallback;
-    private Callback mFailureCallback;
+    private static final String E_FAILED_TO_CREATE_IMAGEFILE = "E_FAILED_TO_CREATE_IMAGEFILE";
+    private static final String E_CAMERA_CANCELLED = "E_CAMERA_CANCELLED";
+
+
+
+
+    private Promise mPromise;
 
 
     public JumpToNativeModule(ReactApplicationContext reactContext) {
@@ -63,14 +75,13 @@ public class JumpToNativeModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void toActivityForResult(String activityName, String params, int requestCode, final Callback successCallback, final Callback failureCallback) {
+    public void toActivityForResult(String activityName, String params, int requestCode, final Promise promise) {
         try {
             Activity currentActivity = getCurrentActivity();
             if (currentActivity != null) {
                 LogUtility.d("------>>>> " + params);
 
-                mSuccessCallback = successCallback;
-                mFailureCallback = failureCallback;
+                mPromise = promise;
 
                 Intent intent = new Intent(currentActivity, Class.forName(activityName));
                 intent.putExtra("params", params);
@@ -84,15 +95,18 @@ public class JumpToNativeModule extends ReactContextBaseJavaModule {
 
 
     @ReactMethod
-    public void openCamera(String params, final Callback successCallback, final Callback failureCallback) {
+    public void openCamera(float photoQuality, final Promise mCameraPromise) {
         Activity currentActivity = getCurrentActivity();
         if (currentActivity != null) {
-            LogUtility.d("------>>>> " + params);
-
-            mSuccessCallback = successCallback;
-            mFailureCallback = failureCallback;
-
-            CameraUtility.openCamera(currentActivity, Constant.CAMERA_REQUEST_CODE);
+            LogUtility.i("------>>>> " + photoQuality);
+            mPromise = mCameraPromise;
+            try {
+                CameraUtility.openCamera(currentActivity,(int)(photoQuality * 100),Constant.CAMERA_REQUEST_CODE);
+            } catch (IOException e) {
+                e.printStackTrace();
+                mPromise.reject(E_FAILED_TO_CREATE_IMAGEFILE, e);
+                mPromise = null;
+            }
         }
     }
 
@@ -102,28 +116,27 @@ public class JumpToNativeModule extends ReactContextBaseJavaModule {
         @Override
         public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
             if (requestCode == Constant.CAMERA_REQUEST_CODE){
-                if (mSuccessCallback != null && mFailureCallback != null){
-                    if (resultCode == Activity.RESULT_CANCELED){
-                        LogUtility.d("==== photoPath ====>>>>> " + "canceled");
-                        mFailureCallback.invoke("failure");
-                        mFailureCallback = null;
-                    }else if (resultCode == Activity.RESULT_OK){
-                        LogUtility.d("==== photoPath ====>>>>> " + PHOTO_PATH);
-                        String bitmapString = DataUtility.bitmapString(PHOTO_PATH);
-                        mSuccessCallback.invoke(bitmapString);
-                        mSuccessCallback = null;
-
+                if (mPromise != null) {
+                    if (resultCode == Activity.RESULT_CANCELED) {
+                        LogUtility.i("==== photoPath ====>>>>> " + "canceled");
+                        mPromise.reject(E_CAMERA_CANCELLED, "camera was cancelled");
+                        mPromise = null;
+                    } else if (resultCode == Activity.RESULT_OK) {
+                        LogUtility.i("==== photoPath ====>>>>> " + PHOTO_PATH);
+                        String bitmapString = DataUtility.bitmapString(PHOTO_PATH,PHOTO_QUALITY);
+                        mPromise.resolve(bitmapString);
+                        mPromise = null;
                     }
                 }
             }else if (requestCode == ACTIVITY_REQUEST_CODE) {
-                if (mSuccessCallback != null && mFailureCallback != null) {
+                if (mPromise != null) {
                     if (resultCode == Activity.RESULT_CANCELED) {
-                        mFailureCallback.invoke("failure");
+                        mPromise.reject(E_CAMERA_CANCELLED, "camera was cancelled");
+                        mPromise = null;
                     } else if (resultCode == RESULT_OK) {
-                        mSuccessCallback.invoke(data.getStringExtra("response"));
+                        mPromise.resolve(data.getStringExtra("response"));
+                        mPromise = null;
                     }
-                    mSuccessCallback = null;
-                    mFailureCallback = null;
                 }
             }
 
