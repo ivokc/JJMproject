@@ -47,7 +47,6 @@ public class PollingUtility {
         PendingIntent pendingIntent = PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         // 触发服务的起始时间
         long triggerAtTime = SystemClock.elapsedRealtime();
-
         // 使用 AlarmManager 的 setRepeating 方法设置定期执行的时间间隔(seconds秒)和要执行的Service
         manager.setRepeating(AlarmManager.ELAPSED_REALTIME, triggerAtTime, TimeUnit.SECONDS.toMillis(seconds), pendingIntent);
     }

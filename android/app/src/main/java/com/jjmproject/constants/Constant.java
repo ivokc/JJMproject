@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat;
 public class Constant {
 
     public static final String appName = "JJMproject";
-
+    public static final String packageName = "com." + appName.toLowerCase();
 
     /* 日志开关 */
     public static final boolean IS_DEBUG = true;

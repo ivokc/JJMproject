@@ -5,7 +5,9 @@
  * @Project: JJMproject
  * @Filename: UIComponents.js
  * @Last modified by:   jjm
- * @Last modified time: 2017-12-20T15:44:34+08:00
+ * @Last modified time: 2018-01-26T17:05:12+08:00
  */
 
 export { default as Button } from './widget/UIButton';
+export { default as EditView } from './widget/UIEditView';
+export { default as DatePicker } from './widget/date-picker/UIDatePicker';

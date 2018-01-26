@@ -34,10 +34,11 @@ public class NotificationUtility {
         // 创建 Notification.Builder 对象
         NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext)
                 .setSmallIcon(icon)
-                // 点击通知后自动清除
-                .setAutoCancel(true)
+                .setAutoCancel(true)// 点击通知后自动清除
                 .setContentTitle(title)
                 .setContentText(message)
+                .setDefaults(NotificationCompat.DEFAULT_ALL)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)//优先级设置
                 .setContentIntent(pendingIntent);
         // 发送通知
         mManager.notify(0, builder.build());

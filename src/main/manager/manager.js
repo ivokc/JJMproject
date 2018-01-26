@@ -5,7 +5,7 @@
  * @Project: JJMproject
  * @Filename: manager.js
  * @Last modified by:   jjm
- * @Last modified time: 2018-01-22T17:52:52+08:00
+ * @Last modified time: 2018-01-26T16:13:53+08:00
  */
 
 import NativeUtility from '../utilities/native/NativeUtility';
@@ -16,9 +16,10 @@ import NetworkUtility from '../utilities/data/NetworkUtility';
 import DBUtility from '../utilities/data/DBUtility';
 import JSONUtility from '../utilities/data/JSONUtility';
 import DebugUtility from '../utilities/other/DebugUtility';
+import PickerViewUtility from '../utilities/ui/PickerViewUtility';
 
 //functional
-export const NativeManager = {
+export const FunctionalManager = {
   ...NativeUtility,
   ...NetworkUtility,
   ...DBUtility,
@@ -31,5 +32,6 @@ export const NativeManager = {
 export const UIManager = {
    ...SplashScreenUtility,
    ...StatusBarUtility,
-   ...DialogUtility
+   ...DialogUtility,
+   ...PickerViewUtility
 };

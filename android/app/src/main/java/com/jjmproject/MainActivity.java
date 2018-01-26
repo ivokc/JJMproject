@@ -37,7 +37,7 @@ public class MainActivity extends ReactActivity implements Initialize {
 
         /* 注意!! 此做法会导致Activity内存泄漏 start */
         // 打开欢迎页
-        SplashScreenUtility.show(this);
+//        SplashScreenUtility.show(this);
         // 初始化 Dialog 管理类
         InfoDialogUtility.init(this);
         // 初始化 ProgressBarDialog 管理类

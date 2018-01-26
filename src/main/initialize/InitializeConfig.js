@@ -5,7 +5,7 @@
  * @Project: JJMproject
  * @Filename: InitializeConfig.js
  * @Last modified by:   jjm
- * @Last modified time: 2017-12-25T17:52:16+08:00
+ * @Last modified time: 2018-01-25T11:54:39+08:00
  */
 
 
@@ -15,7 +15,7 @@
 
          // 设置StatusBar颜色rr
          // Just.setHexColor(Color.lightBlue);
-         Just.hideSplashScreen();
+         // Just.hideSplashScreen();
          // alert('ddd');
      }
 

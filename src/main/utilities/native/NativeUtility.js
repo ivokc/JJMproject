@@ -5,7 +5,7 @@
  * @Project: JJMproject
  * @Filename: NativeUtility.js
  * @Last modified by:   jjm
- * @Last modified time: 2018-01-24T10:30:56+08:00
+ * @Last modified time: 2018-01-26T15:38:57+08:00
  */
 import { Platform } from 'react-native';
 import { JumpToNativeModule, CameraModule, ImageCacheModule, NotificationModule, PollingModule, PickerModule } from '../../native-modules/NativeModules';
@@ -22,6 +22,7 @@ export default NativeUtility = {
 
     // 图片缓存
     cacheImage(imageURL) {
+
       ImageCacheModule.cacheImage(imageURL);
     },
 
@@ -30,7 +31,11 @@ export default NativeUtility = {
     },
 
     currentDiskCacheSize() {
-      return ImageCacheModule.currentDiskCacheSize();
+        if (Platform.OS === 'android') {
+
+        }else {
+            return ImageCacheModule.currentDiskCacheSize();
+        }
     },
 
     clearCache() {
@@ -38,19 +43,19 @@ export default NativeUtility = {
     },
 
     // 轮询
-    startPolling(pollingID, timeInterval) {
+    startPolling(pollingIdOrServiceName, timeInterval) {
       if (Platform.OS === 'android') {
-
+          PollingModule.startPolling(pollingIdOrServiceName,timeInterval);
       } else {
-          PollingModule.startPolling(pollingID, timeInterval);
+          PollingModule.startPolling(pollingIdOrServiceName, timeInterval);
       }
     },
 
-    stopPolling(pollingID) {
+    stopPolling(pollingIdOrServiceName) {
       if (Platform.OS === 'android') {
-
+          PollingModule.stopPolling(pollingIdOrServiceName);
       } else {
-          PollingModule.stopPolling(pollingID);
+          PollingModule.stopPolling(pollingIdOrServiceName);
       }
     },
 
@@ -68,22 +73,6 @@ export default NativeUtility = {
 
       } else {
         NotificationModule.sendLocalNotificationAfter(after, title, message, badgeNumber);
-      }
-    },
-
-    //picker选择器
-    showPicker(title, datas, badgeNumber) {
-      if (Platform.OS === 'android') {
-
-      } else {
-        PickerModule.initPicker(datas,title,badgeNumber);
-      }
-    },
-    showDatePicker(title, badgeNumber) {
-      if (Platform.OS === 'android') {
-
-      } else {
-        PickerModule.initDatePicker(title,badgeNumber);
       }
     }
 

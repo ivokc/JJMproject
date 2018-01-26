@@ -1,4 +1,16 @@
 /**
+ * @Author: jjm
+ * @Date:   2018-01-22T10:39:16+08:00
+ * @Email:  jijm@bosc.cn
+ * @Project: JJMproject
+ * @Filename: DBUtility.js
+ * @Last modified by:   jjm
+ * @Last modified time: 2018-01-26T10:57:59+08:00
+ */
+
+
+
+/**
  * Created by MeePwn
  * https://github.com/maybewaityou
  *
@@ -23,7 +35,7 @@ const JSONSchema = {
   },
 };
 
-export const DBUtility = {
+export default DBUtility = {
 
   add(data) {
     return new Promise((resolve, reject) => {

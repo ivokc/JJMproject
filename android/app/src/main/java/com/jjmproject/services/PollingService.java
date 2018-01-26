@@ -55,13 +55,14 @@ public class PollingService extends Service {
         @Override
         public void run() {
             showNotification("title", "message");
+            stopSelf();
         }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        LogUtility.d("Service: onDestroy");
+        LogUtility.i("Service: onDestroy");
     }
 
 }

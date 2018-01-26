@@ -5,7 +5,7 @@
  * @Project: JJMproject
  * @Filename: TestView.js
  * @Last modified by:   jjm
- * @Last modified time: 2018-01-24T11:04:34+08:00
+ * @Last modified time: 2018-01-26T17:05:44+08:00
  */
 
 
@@ -26,7 +26,7 @@ import {
     TouchableOpacity,
     ScrollView
 } from 'react-native';
-import { Button } from '../main/components/UIComponents';
+import { Button,DatePicker } from '../main/components/UIComponents';
 
 const log = console.log;
 
@@ -34,16 +34,16 @@ export default class TestView extends React.Component {
 
   constructor(props) {
       super(props);
+      this.state = { imageData:'' };
+  };
 
-      this.state = {
-        imageData: ''
-      }
-  }
+
 
   render() {
     return (
-      <ScrollView style={styles.container}>
+        <ScrollView>
         <Text style={styles.testResult}>{this.props.data}</Text>
+
         <Button title="dispatch count ++" style={styles.marginTop} onPress={this.props.handleCountPlusPress} />
         <Button title="dispatch count --" style={styles.marginTop} onPress={this.props.handleCountMinusPress} />
         <Button title="发送请求" style={styles.marginTop} onPress={() => {
@@ -94,22 +94,23 @@ export default class TestView extends React.Component {
           });
         }} />
         <Button title="开启轮询 0" style={styles.marginTop} onPress={() => {
-          Just.startPolling('polling_00', 3);
+          // Just.startPolling('polling_00', 3);//ios
+          Just.startPolling('PollingService',5);
         }} />
         <Button title="开启轮询 1" style={styles.marginTop} onPress={() => {
           Just.startPolling('polling_01', 3);
         }} />
         <Button title="停止轮询 0" style={styles.marginTop} onPress={() => {
-          Just.stopPolling('polling_00');
+          Just.stopPolling('PollingService');
         }} />
         <Button title="停止轮询 1" style={styles.marginTop} onPress={() => {
           Just.stopPolling('polling_01');
         }} />
         <Button title="缓存图片" style={styles.marginTop} onPress={() => {
-          Just.cacheImage('http://10.240.90.214:8087/home/20170411104021863.png');
+          Just.cacheImage('http://127.0.0.1:8000/jjm.jpg');
         }} />
         <Button title="获取缓存图片" style={styles.marginTop} onPress={() => {
-          Just.imageFromCache('http://10.240.90.214:8087/home/20170411104021863.png')
+          Just.imageFromCache('http://127.0.0.1:8000/jjm.jpg')
             .then((image: any) => {
               log(image);
             })
@@ -169,15 +170,61 @@ export default class TestView extends React.Component {
           Just.deleteAll();
         }} />
         <Button title="picker选择器" style={styles.marginTop} onPress={() => {
-          Just.showPicker('地址选择器',['111','222','333','444','555'],(message: string, index: any)=>{
-            log(message,index);
+
+            Just.initPicker({
+                confirmButtonColor: [17,119,219, 1],
+                cancelButtonColor: [17,119,219, 1],
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                titleText: 'title',
+                data: ['aaa','bbb','ccc','ddd'],
+                selectedValue: [],
+                onPickerConfirm: ()=>{},
+                onPickerCancel: ()=>{},
             });
+            Just.showPicker();
+
+
+          // Just.showPicker('地址选择器',['111','222','333','444','555'],(message: string, index: any)=>{
+          //   log(message,index);
+          //   });
         }} />
         <Button title="picker时间选择器" style={styles.marginTop} onPress={() => {
           Just.showDatePicker('时间选择器',(message: string) => {
             log(message);
             });
         }} />
+
+        <DatePicker
+            style={styles.datePickerLayout}
+            showIcon={false}
+            date={this.props.value}
+            mode='date'
+            placeholder='请选择'
+            format='YYYY-MM-DD'
+            confirmBtnText='确定'
+            cancelBtnText='取消'
+            disabled={this.props.disabled}
+            customStyles={{
+                dateInput: {
+                    height: Constant.editLayoutHeight,
+                    alignItems: 'flex-start',
+                    paddingLeft: 15,
+                    borderColor: 'gray',
+                    borderRadius: 10,
+                    borderWidth: 1,
+                },
+                dateText: {
+                    fontSize: Constant.fontSize,
+                },
+                disabled: {
+                    backgroundColor: Color.disabledBackgroundColor
+                }
+            }}
+            onDateChange={(date) => {
+                this.props.onDateChange(date);
+            }}
+        />
       </ScrollView>
     );
   }

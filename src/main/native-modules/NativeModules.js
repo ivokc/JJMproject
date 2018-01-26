@@ -5,7 +5,7 @@
  * @Project: JJMproject
  * @Filename: NativeModules.js
  * @Last modified by:   jjm
- * @Last modified time: 2018-01-15T18:39:57+08:00
+ * @Last modified time: 2018-01-26T16:07:26+08:00
  */
 import { NativeModules } from 'react-native';
 
@@ -13,7 +13,8 @@ import { NativeModules } from 'react-native';
 export const StatusBarModule =  NativeModules.StatusBarModule;
 export const SplashScreenModule =  NativeModules.SplashScreenModule;
 export const DialogModule =  NativeModules.DialogModule;
-export const PickerViewModule =  NativeModules.PickerViewModule;
+export const PickerViewModule =  NativeModules.PickerViewModule;//android
+export const PickerModule =  NativeModules.PickerModule;//ios
 
 //functional
 export const JumpToNativeModule = NativeModules.JumpToNativeModule;
@@ -29,5 +30,3 @@ export const PollingModule = NativeModules.PollingModule;
 export const ProgressBarModule = NativeModules.ProgressBarModule;
 export const SandboxModule = NativeModules.SandboxModule;
 export const CameraModule = NativeModules.CameraModule;
-
-export const PickerModule =  NativeModules.PickerModule;

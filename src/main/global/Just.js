@@ -5,12 +5,12 @@
  * @Project: JJMproject
  * @Filename: Just.js
  * @Last modified by:   jjm
- * @Last modified time: 2018-01-22T17:55:37+08:00
+ * @Last modified time: 2018-01-26T10:48:34+08:00
  */
-import {NativeManager,UIManager} from '../manager/manager';
+import {FunctionalManager,UIManager} from '../manager/manager';
 // import * as manager from '../manager/manager'
 
 global.Just = {
-    ...NativeManager,
+    ...FunctionalManager,
     ...UIManager
 }
