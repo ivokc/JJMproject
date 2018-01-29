@@ -13,19 +13,19 @@ import com.facebook.react.bridge.ReactMethod;
  * desc:
  */
 
-public class ExistAppModule extends ReactContextBaseJavaModule {
+public class ExitAppModule extends ReactContextBaseJavaModule {
 
-    public ExistAppModule(ReactApplicationContext reactContext) {
+    public ExitAppModule(ReactApplicationContext reactContext) {
         super(reactContext);
     }
 
     @Override
     public String getName() {
-        return "ExistAppModule";
+        return "ExitAppModule";
     }
 
     @ReactMethod
-    public void existApp() {
+    public void exitApp() {
         System.exit(0);
     }
 

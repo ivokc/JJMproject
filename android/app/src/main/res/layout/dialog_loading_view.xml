@@ -8,7 +8,7 @@
         android:layout_centerInParent="true"
         android:layout_width="@dimen/progressbar_layout_width"
         android:layout_height="wrap_content"
-        android:background="@android:color/black">
+        android:background="@color/tranparent">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

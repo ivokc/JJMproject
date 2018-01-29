@@ -5,13 +5,14 @@
  * @Project: JJMproject
  * @Filename: NativeUtility.js
  * @Last modified by:   jjm
- * @Last modified time: 2018-01-26T15:38:57+08:00
+ * @Last modified time: 2018-01-29T17:20:22+08:00
  */
 import { Platform } from 'react-native';
-import { JumpToNativeModule, CameraModule, ImageCacheModule, NotificationModule, PollingModule, PickerModule } from '../../native-modules/NativeModules';
+import { JumpToNativeModule, CameraModule, ImageCacheModule, NotificationModule, PollingModule, PickerModule,ExitAppModule } from '../../native-modules/NativeModules';
 
 export default NativeUtility = {
 
+    //拍照
     openCamera(params) {
       if (Platform.OS === 'android') {
          return JumpToNativeModule.openCamera(params.quality ? params.quality : 0.1);
@@ -74,6 +75,31 @@ export default NativeUtility = {
       } else {
         NotificationModule.sendLocalNotificationAfter(after, title, message, badgeNumber);
       }
+    },
+
+    //上行盒子统一认证
+    getSSOToken(){
+        if (Platform.OS === 'android') {
+            return MdmAuthModule.getSSOToken();
+        } else {
+        }
+    },
+    getUserName(){
+        if (Platform.OS === 'android') {
+            return MdmAuthModule.getUserName();
+        } else {
+        }
+    },
+
+
+
+
+    //退出应用
+    exitApp(){
+        if (Platform.OS === 'android') {
+            ExitAppModule.exitApp();
+        }
     }
+
 
 }
