@@ -58,6 +58,7 @@ export default class TestView extends React.Component {
               log('error!!',error);
             })
         }} />
+        <Button title="form page" style={styles.marginTop} onPress={this.props.goFormPagePress} />
         <Button title="other page" style={styles.marginTop} onPress={this.props.handleNextPagePress} />
         {this.state.imageData !== '' ? <Image resizeMode="contain" source={{ uri: `data:image/png;base64,${this.state.imageData}` }} style={styles.imageData} /> : null}
         <Button title="Open Camera" style={styles.marginTop} onPress={() => {
@@ -169,62 +170,8 @@ export default class TestView extends React.Component {
         <Button title="Delete All" style={styles.marginTop} onPress={async () => {
           Just.deleteAll();
         }} />
-        <Button title="picker选择器" style={styles.marginTop} onPress={() => {
-
-            Just.initPicker({
-                confirmButtonColor: [17,119,219, 1],
-                cancelButtonColor: [17,119,219, 1],
-                confirmButtonText: '确定',
-                cancelButtonText: '取消',
-                titleText: 'title',
-                data: ['aaa','bbb','ccc','ddd'],
-                selectedValue: [],
-                onPickerConfirm: ()=>{},
-                onPickerCancel: ()=>{},
-            });
-            Just.showPicker();
 
 
-          // Just.showPicker('地址选择器',['111','222','333','444','555'],(message: string, index: any)=>{
-          //   log(message,index);
-          //   });
-        }} />
-        <Button title="picker时间选择器" style={styles.marginTop} onPress={() => {
-          Just.showDatePicker('时间选择器',(message: string) => {
-            log(message);
-            });
-        }} />
-
-        <DatePicker
-            style={styles.datePickerLayout}
-            showIcon={false}
-            date={this.props.value}
-            mode='date'
-            placeholder='请选择'
-            format='YYYY-MM-DD'
-            confirmBtnText='确定'
-            cancelBtnText='取消'
-            disabled={this.props.disabled}
-            customStyles={{
-                dateInput: {
-                    height: Constant.editLayoutHeight,
-                    alignItems: 'flex-start',
-                    paddingLeft: 15,
-                    borderColor: 'gray',
-                    borderRadius: 10,
-                    borderWidth: 1,
-                },
-                dateText: {
-                    fontSize: Constant.fontSize,
-                },
-                disabled: {
-                    backgroundColor: Color.disabledBackgroundColor
-                }
-            }}
-            onDateChange={(date) => {
-                this.props.onDateChange(date);
-            }}
-        />
       </ScrollView>
     );
   }

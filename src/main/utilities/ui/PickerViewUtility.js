@@ -22,7 +22,7 @@ import {
     NativeAppEventEmitter
 } from 'react-native';
 
-import { PickerModule,PickerViewModule } from '../../native-modules/NativeModules';
+import { PickerViewModule } from '../../native-modules/NativeModules';
 
 let ios = Platform.OS === 'ios';
 let android = Platform.OS === 'android';
@@ -46,6 +46,7 @@ const PickerViewUtility = {
             toolBarBackground: [232, 232, 232, 1],
             background: [196, 199, 206, 1],
             wheelFlex: [1, 1, 1],
+            rowHeight: 44,
             data: [''],
             selectedValue: [],
             onPickerConfirm(){},
@@ -64,6 +65,7 @@ const PickerViewUtility = {
         };
 
         PickerViewModule.initPicker(opt);
+
         // there are no `removeListener` for NativeAppEventEmitter & DeviceEventEmitter
         this.listener && this.listener.remove();
         this.listener = NativeAppEventEmitter.addListener('pickerEvent', (event) => {
@@ -71,12 +73,8 @@ const PickerViewUtility = {
         });
     },
 
-
-
-
-
     selectPicker(arr, fn) {
-        if(ios){
+        if(ios) {
             PickerViewModule.select(arr);
         } else if(android) {
             PickerViewModule.select(arr, (err) => {
@@ -110,22 +108,12 @@ const PickerViewUtility = {
     },
 
     showPicker(title, datas, badgeNumber) {
-      if (Platform.OS === 'android') {
-          PickerViewModule.show();
-      } else {
-        PickerModule.initPicker(datas,title,badgeNumber);
-      }
+        PickerViewModule.show();
     },
+
     hidePicker() {
         PickerViewModule.hide();
     },
-    showDatePicker(title, badgeNumber) {
-      if (Platform.OS === 'android') {
-
-      } else {
-        PickerModule.initDatePicker(title,badgeNumber);
-      }
-    }
 
 };
 

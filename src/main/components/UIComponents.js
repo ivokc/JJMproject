@@ -10,4 +10,8 @@
 
 export { default as Button } from './widget/UIButton';
 export { default as EditView } from './widget/UIEditView';
-export { default as DatePicker } from './widget/date-picker/UIDatePicker';
+export { default as Picker } from './widget//UIPicker';
+export { default as DatePicker } from './widget//UIDatePicker';
+export { default as Switch } from './widget/UISwitch';
+export { default as FormItem } from './form/UIFormItem';
+export { default as DisplayLabel } from './widget/UIDisplayLabel';

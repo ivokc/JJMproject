@@ -8,64 +8,19 @@
  * @Last modified time: 2018-01-26T16:52:47+08:00
  */
 
-
-
-/**
- * Created by MeePwn
- * https://github.com/maybewaityou
- *
- * description:
- *
- */
-import React, { PureComponent, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
 import {
     StyleSheet,
     Text,
     TouchableOpacity,
     View
 } from 'react-native';
+
 import UIEditView from '../widget/UIEditView';
 import UIButton from '../widget/UIButton';
-import UIDatePicker from '../widget/date-picker/UIDatePicker';
-
-
-const propTypes = {
-    type: PropTypes.oneOf(['editView', 'button', 'datePicker', 'picker']),
-    title: PropTypes.string,
-    value: PropTypes.any,
-    defaultValue:PropTypes.string,
-    buttonTitle: PropTypes.string,
-    buttonDisabled: PropTypes.bool,
-    editable: PropTypes.bool,
-    disabled: PropTypes.bool,
-    keyboardType: PropTypes.oneOf(['default', 'numeric', 'email-address', 'ascii-capable', 'numbers-and-punctuation', 'url', 'number-pad', 'phone-pad', 'name-phone-pad', 'decimal-pad', 'twitter', 'web-search']),
-    placeholder: PropTypes.string,
-    secureTextEntry: PropTypes.bool,
-    style: PropTypes.any,
-    titleStyle: PropTypes.any,
-    editViewStyle: PropTypes.any,
-    buttonStyle: PropTypes.any,
-    buttonTitleStyle: PropTypes.any,
-    fingerStyle: PropTypes.any,
-    autoCapitalize: PropTypes.oneOf(['none', 'sentences', 'words', 'characters']),
-    onBlur: PropTypes.func,
-    onFocus: PropTypes.func,
-    onChange: PropTypes.func,
-    onChangeText: PropTypes.func,
-    onEndEditing: PropTypes.func,
-    onDateChange: PropTypes.func,
-    handlePress: PropTypes.func,
-
-    /* picker start */
-    titleText: PropTypes.string,
-    data: PropTypes.array,
-    selectedValue: PropTypes.any,
-    onPickerConfirm: PropTypes.func,
-    onPickerCancel: PropTypes.func,
-    /* picker end */
-
-    required: PropTypes.bool, // 必填
-};
+import UIPicker from '../widget/UIPicker';
+import UIDatePicker from '../widget/UIDatePicker';
+import UISwitch from '../widget/UISwitch';
 
 const defaultProps = {
     type: 'editView',
@@ -76,12 +31,10 @@ const defaultState = {
 
 };
 
-@pureRender
 export default class UIFormItem extends PureComponent {
 
     constructor(props) {
         super(props);
-
         this.state = defaultState;
     }
 
@@ -94,70 +47,66 @@ export default class UIFormItem extends PureComponent {
                 disabled={this.props.buttonDisabled}
                 style={[styles.buttonStyle, this.props.buttonStyle]}
                 titleStyle={this.props.buttonTitleStyle}
-                handlePress={this.props.handlePress}
+                handlePress={this.props.handleButtonPress}
             />
         ) : (<View />);
-        const starComponent = this.props.required ? ( <Text style={styles.star}>*</Text> ) : ( <View style={styles.emptyStar} /> );
+        const starComponent = this.props.required ? ( <Text style={[styles.starStyle,this.props.starStyle]}>*</Text> ) : ( <View style={styles.emptyStar} /> );
         return (
             <View style={[styles.container, this.props.style]}>
                 <Text style={[styles.titleStyle, this.props.titleStyle]}>{this.props.title + ' :  '}</Text>
                 <UIEditView
-                    editable={this.props.editable}
+                    disabled={this.props.disabled}
                     placeholder={this.props.placeholder}
+                    placeholderTextColor={this.props.placeholderTextColor}
                     value={this.props.value}
                     defaultValue ={this.props.defaultValue}
                     keyboardType={this.props.keyboardType}
                     autoCapitalize={this.props.autoCapitalize}
                     secureTextEntry={this.props.secureTextEntry}
                     underlineColorAndroid='transparent'
-                    style={[styles.editViewStyle, this.props.buttonTitle ? this.props.hsBtnViewStyle : this.props.editViewStyle]}
+                    style={[styles.contentStyle, this.props.buttonTitle ? this.props.hasBtnContentStyle : this.props.contentStyle]}
+                    textStyle={this.props.textStyle}
                     onBlur={this.props.onBlur}
                     onFocus={this.props.onFocus}
                     onChange={this.props.onChange}
                     onChangeText={this.props.onChangeText}
                     onEndEditing={this.props.onEndEditing}
                 />
-                {starComponent}
                 {buttonComponents}
+                {starComponent}
             </View>
         );
     };
 
     renderDatePicker = () => {
-        const starComponent = this.props.required ? ( <Text style={styles.star}>*</Text> ) : ( <View style={styles.emptyStar} /> );
+        const buttonComponents = this.props.buttonTitle ? (
+            <UIButton
+                positive={true}
+                title={this.props.buttonTitle}
+                underlayColor={Color.darkOrange}
+                disabled={this.props.buttonDisabled}
+                style={[styles.buttonStyle, this.props.buttonStyle]}
+                titleStyle={this.props.buttonTitleStyle}
+                handlePress={this.props.handleButtonPress}
+            />
+        ) : (<View />);
+        const starComponent = this.props.required ? ( <Text style={[styles.starStyle,this.props.starStyle]}>*</Text> ) : ( <View style={styles.emptyStar} /> );
         return (
             <View style={[styles.container, this.props.style]}>
-                <Text style={[styles.titleStyle, this.props.textStyle]}>{this.props.title + ' :  '}</Text>
+                <Text style={[styles.titleStyle, this.props.titleStyle]}>{this.props.title + ' :  '}</Text>
                 <UIDatePicker
-                    style={styles.datePickerLayout}
-                    showIcon={false}
+                    style={this.props.contentStyle}
+                    textStyle={this.props.textStyle}
                     date={this.props.value}
                     mode='date'
-                    placeholder='请选择'
+                    placeholder={this.props.placeholder}
                     format='YYYY-MM-DD'
-                    confirmBtnText='确定'
-                    cancelBtnText='取消'
                     disabled={this.props.disabled}
-                    customStyles={{
-                        dateInput: {
-                            height: Constant.editLayoutHeight,
-                            alignItems: 'flex-start',
-                            paddingLeft: 15,
-                            borderColor: 'gray',
-                            borderRadius: 10,
-                            borderWidth: 1,
-                        },
-                        dateText: {
-                            fontSize: Constant.fontSize,
-                        },
-                        disabled: {
-                            backgroundColor: Color.disabledBackgroundColor
-                        }
-                    }}
                     onDateChange={(date) => {
                         this.props.onDateChange(date);
                     }}
                 />
+                {buttonComponents}
                 {starComponent}
             </View>
         );
@@ -165,13 +114,19 @@ export default class UIFormItem extends PureComponent {
 
 
     renderButton = () => {
-        const starComponent = this.props.required ? ( <Text style={styles.star}>*</Text> ) : ( <View style={styles.emptyStar} /> );
+        const starComponent = this.props.required ? ( <Text style={[styles.starStyle,this.props.starStyle]}>*</Text> ) : ( <View style={styles.emptyStar} /> );
         return (
             <View style={[styles.container, this.props.style]}>
                 <Text style={[styles.titleStyle, this.props.titleStyle]}>{this.props.title + ' :  '}</Text>
-                <TouchableOpacity activeOpacity={0.8} disabled={this.props.disabled} style={[styles.pickerLayout, this.props.buttonStyle, this.props.disabled === true ? styles.disabledBackground : {}]} onPress={this.props.handlePress}>
-                    <Text style={styles.pickerText}>{this.props.value}</Text>
-                </TouchableOpacity>
+                <UIButton
+                    positive={this.props.positive}
+                    title={this.props.buttonTitle}
+                    underlayColor={this.props.underlayColor}
+                    disabled={this.props.disabled}
+                    style={[styles.contentStyle, this.props.contentStyle]}
+                    titleStyle={this.props.buttonTitleStyle}
+                    onPress={this.props.onPress}
+                />
                 {starComponent}
             </View>
         );
@@ -184,33 +139,51 @@ export default class UIFormItem extends PureComponent {
                 title={this.props.buttonTitle}
                 underlayColor={Color.darkOrange}
                 disabled={this.props.buttonDisabled}
-                style={[styles.buttonStyle, this.props.buttonStyle]}
+                style={[styles.contentStyle, this.props.contentStyle]}
                 titleStyle={this.props.buttonTitleStyle}
-                handlePress={this.props.handlePress}
+                handlePress={this.props.handleButtonPress}
             />
         ) : (<View />);
-        const starComponent = this.props.required ? ( <Text style={styles.star}>*</Text> ) : ( <View style={styles.emptyStar} /> );
+        const starComponent = this.props.required ? ( <Text style={[styles.starStyle,this.props.starStyle]}>*</Text> ) : ( <View style={styles.emptyStar} /> );
         return (
             <View style={[styles.container, this.props.style]}>
                 <Text style={[styles.titleStyle, this.props.titleStyle]}>{this.props.title + ' :  '}</Text>
-                <TouchableOpacity activeOpacity={0.8} disabled={this.props.disabled} style={[styles.pickerLayout, this.props.pickerStyle, this.props.disabled === true ? styles.disabledBackground : {}]} onPress={() => {
-                    Just.initPicker({
-                        confirmButtonColor: [17,119,219, 1],
-                        cancelButtonColor: [17,119,219, 1],
-                        confirmButtonText: '确定',
-                        cancelButtonText: '取消',
-                        titleText: this.props.titleText,
-                        data: this.props.data,
-                        selectedValue: [this.props.value],
-                        onPickerConfirm: this.props.onPickerConfirm,
-                        onPickerCancel: this.props.onPickerCancel,
-                    });
-                    Just.showPicker();
-                }}>
-                    <Text style={styles.pickerText}>{this.props.value}</Text>
-                </TouchableOpacity>
-                {starComponent}
+                <UIPicker
+                    style={this.props.contentStyle}
+                    textStyle={this.props.textStyle}
+                    titleText={this.props.pickerTitle}
+                    placeholder={this.props.placeholder}
+                    disabled={this.props.disabled}
+                    data={this.props.data}
+                    value={this.props.value}
+                    onPickerConfirm = {this.props.onPickerConfirm}
+                    onPickerCancel = {this.props.onPickerCancel}
+                />
                 {buttonComponents}
+                {starComponent}
+            </View>
+        );
+    };
+
+    renderSwitch = () => {
+
+        return (
+            <View style={[styles.container, this.props.style]}>
+                <Text style={[styles.titleStyle, this.props.titleStyle]}>{this.props.title + ' :  '}</Text>
+                <UISwitch
+                    value={this.props.value}
+                    onValueChange={this.props.onValueChange}
+                    disabled={this.props.disabled}
+                    activeText={this.props.activeText}
+                    inActiveText={this.props.inActiveText}
+                    circleSize={this.props.circleSize}
+                    barHeight={this.props.barHeight}
+                    circleBorderWidth={this.props.circleBorderWidth}
+                    backgroundActive={this.props.backgroundActive}
+                    circleActiveColor={this.props.circleActiveColor}
+                    backgroundInactive={this.props.backgroundInactive}
+                    circleInActiveColor={this.props.circleInActiveColor}
+                />
             </View>
         );
     };
@@ -220,13 +193,13 @@ export default class UIFormItem extends PureComponent {
         const component = this.props.type === 'editView' ? this.renderEditView() :
             this.props.type === 'button' ? this.renderButton() :
             this.props.type === 'datePicker' ? this.renderDatePicker() :
-            this.props.type === 'picker' ? this.renderPicker() : (<View />);
+            this.props.type === 'picker' ? this.renderPicker() :
+            this.props.type === 'switch' ? this.renderSwitch() : (<View />);
 
         return component;
     }
 }
 
-UIFormItem.propTypes = propTypes;
 UIFormItem.defaultProps = defaultProps;
 
 const styles = StyleSheet.create({
@@ -235,56 +208,40 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     titleStyle: {
-        width: Constant.displayKeyLabelWidth,
-        fontSize: Constant.fontSize,
+        width: 180,
+        fontSize: 16,
         textAlign: 'right',
     },
-    editViewStyle: {
-        width: Constant.editLayoutWidth,
 
+    contentStyle: {
+        width: 200,
+        height: 60,
     },
-    datePickerLayout: {
-        width: Constant.editLayoutWidth,
-    },
-    pickerLayout: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: Constant.editLayoutWidth,
-        height: Constant.editLayoutHeight,
-        borderColor: 'gray',
-        borderWidth: 1,
-        borderRadius: 10,
-    },
-    pickerText: {
+
+    buttonTextStyle: {
         fontSize: Constant.fontSize,
         textAlign: 'center',
     },
+
     buttonStyle: {
         marginLeft: 15,
         paddingLeft: 5,
         paddingRight: 5,
         backgroundColor: Color.lightOrange
     },
-    text: {
-        fontSize: Constant.fontSize,
-        textAlign: 'center'
-    },
-    divideText: {
-        marginLeft: 3,
-        marginRight: 5
-    },
-    star: {
+
+    starStyle: {
         fontSize: 16,
         color: 'red',
         marginLeft: 10,
     },
+
     emptyStar: {
         marginLeft: 10,
     },
 
     disabledBackground: {
         backgroundColor: Color.disabledBackgroundColor,
-
     },
 
 });

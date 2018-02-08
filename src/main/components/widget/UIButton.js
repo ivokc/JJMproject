@@ -1,13 +1,4 @@
-/**
- * @Author: jjm
- * @Date:   2017-12-20T15:41:47+08:00
- * @Email:  jijm@bosc.cn
- * @Project: JJMproject
- * @Filename: UIButton.js
- * @Last modified by:   jjm
- * @Last modified time: 2017-12-26T10:13:01+08:00
- */
- import React, { PureComponent, PropTypes } from 'react';
+ import React, {PureComponent} from 'react';
  import {
      StyleSheet,
      TouchableHighlight,
@@ -27,8 +18,6 @@ export default class UIButton extends PureComponent {
 
     constructor(props) {
         super(props);
-
-
     }
 
     render() {

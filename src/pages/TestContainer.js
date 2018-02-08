@@ -34,6 +34,10 @@ class TestContainer extends React.Component {
     });
   }
 
+  goFormPagePress = () => {
+    this.props.navigation.navigate('FormPage');
+  }
+
   render() {
     return (
       <TestView
@@ -41,6 +45,7 @@ class TestContainer extends React.Component {
         handleCountPlusPress={this.handleCountPlusPress}
         handleCountMinusPress={this.handleCountMinusPress}
         handleNextPagePress={this.handleNextPagePress}
+        goFormPagePress={this.goFormPagePress}
       />
     )
   }

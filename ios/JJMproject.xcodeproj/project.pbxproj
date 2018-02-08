@@ -32,6 +32,11 @@
 		2DCD954D1E0B4F2C00145EB5 /* JJMprojectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* JJMprojectTests.m */; };
 		46FC87A735EF4EADB3912B40 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D922983B16B46B9B11FC27A /* libc++.tbd */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
+		6006CC84201F058C004AB8A5 /* RNDatePickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6006CC5C201F058C004AB8A5 /* RNDatePickView.m */; };
+		6006CC85201F058C004AB8A5 /* RNPickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6006CC5F201F058C004AB8A5 /* RNPickView.m */; };
+		6006CC8B201F05B4004AB8A5 /* BzwPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6006CC89201F05B4004AB8A5 /* BzwPicker.m */; };
+		6006CC8E201F0627004AB8A5 /* PickerViewModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 6006CC8D201F0626004AB8A5 /* PickerViewModule.m */; };
+		6006CC91201F1757004AB8A5 /* PickerModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 6006CC90201F1756004AB8A5 /* PickerModule.m */; };
 		60084CB3200DDAB0000C5C68 /* RxSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6027A4A9200DA25C0044DCFE /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		60084CD8200DDAB5000C5C68 /* Async.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6027A4AB200DA26F0044DCFE /* Async.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		60084CD9200DDABF000C5C68 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6027A4A7200DA2490044DCFE /* RxCocoa.framework */; };
@@ -138,9 +143,6 @@
 		6027A4AE200DA27F0044DCFE /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6027A4AD200DA27F0044DCFE /* Alamofire.framework */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8CCBA386400647C29CDC8091 /* libRealmReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F37CA9F9E0449AFB15E13F1 /* libRealmReact.a */; };
-		AC46FECF200F477E001B5FE4 /* PickerModule.m in Sources */ = {isa = PBXBuildFile; fileRef = AC46FEAA200F477E001B5FE4 /* PickerModule.m */; };
-		AC46FED5200F4810001B5FE4 /* RNPickView.m in Sources */ = {isa = PBXBuildFile; fileRef = AC46FED3200F480C001B5FE4 /* RNPickView.m */; };
-		AC46FED6200F4810001B5FE4 /* RNDatePickView.m in Sources */ = {isa = PBXBuildFile; fileRef = AC46FED4200F4810001B5FE4 /* RNDatePickView.m */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 /* End PBXBuildFile section */
 
@@ -459,6 +461,16 @@
 		2D02E47B1E0B4A5D006451C7 /* JJMproject-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "JJMproject-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* JJMproject-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "JJMproject-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
+		6006CC5C201F058C004AB8A5 /* RNDatePickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNDatePickView.m; sourceTree = "<group>"; };
+		6006CC5D201F058C004AB8A5 /* RNPickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNPickView.h; sourceTree = "<group>"; };
+		6006CC5E201F058C004AB8A5 /* RNDatePickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNDatePickView.h; sourceTree = "<group>"; };
+		6006CC5F201F058C004AB8A5 /* RNPickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNPickView.m; sourceTree = "<group>"; };
+		6006CC87201F05B2004AB8A5 /* BzwPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BzwPicker.h; sourceTree = "<group>"; };
+		6006CC89201F05B4004AB8A5 /* BzwPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BzwPicker.m; sourceTree = "<group>"; };
+		6006CC8C201F0626004AB8A5 /* PickerViewModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerViewModule.h; sourceTree = "<group>"; };
+		6006CC8D201F0626004AB8A5 /* PickerViewModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerViewModule.m; sourceTree = "<group>"; };
+		6006CC8F201F1755004AB8A5 /* PickerModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerModule.h; sourceTree = "<group>"; };
+		6006CC90201F1756004AB8A5 /* PickerModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerModule.m; sourceTree = "<group>"; };
 		6027A38A200D9CCF0044DCFE /* DialogManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogManager.swift; sourceTree = "<group>"; };
 		6027A38B200D9CCF0044DCFE /* ProgressBarManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBarManager.swift; sourceTree = "<group>"; };
 		6027A38E200D9CCF0044DCFE /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
@@ -572,12 +584,6 @@
 		7D922983B16B46B9B11FC27A /* libc++.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		7F37CA9F9E0449AFB15E13F1 /* libRealmReact.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRealmReact.a; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
-		AC46FEA9200F477E001B5FE4 /* PickerModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerModule.h; sourceTree = "<group>"; };
-		AC46FEAA200F477E001B5FE4 /* PickerModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerModule.m; sourceTree = "<group>"; };
-		AC46FED1200F4801001B5FE4 /* RNDatePickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNDatePickView.h; sourceTree = "<group>"; };
-		AC46FED2200F4806001B5FE4 /* RNPickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNPickView.h; sourceTree = "<group>"; };
-		AC46FED3200F480C001B5FE4 /* RNPickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNPickView.m; sourceTree = "<group>"; };
-		AC46FED4200F4810001B5FE4 /* RNDatePickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNDatePickView.m; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -783,6 +789,17 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		6006CC5B201F058C004AB8A5 /* CustomPicker */ = {
+			isa = PBXGroup;
+			children = (
+				6006CC5C201F058C004AB8A5 /* RNDatePickView.m */,
+				6006CC5D201F058C004AB8A5 /* RNPickView.h */,
+				6006CC5E201F058C004AB8A5 /* RNDatePickView.h */,
+				6006CC5F201F058C004AB8A5 /* RNPickView.m */,
+			);
+			path = CustomPicker;
+			sourceTree = "<group>";
+		};
 		60084D8A200DCA4A00A5C6A2 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -875,6 +892,7 @@
 		6027A3A5200D9CCF0044DCFE /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
+				6006CC5B201F058C004AB8A5 /* CustomPicker */,
 				AC46FED0200F47DC001B5FE4 /* Picker */,
 				6027A3A8200D9CCF0044DCFE /* ProgressBar */,
 				6027A3AB200D9CCF0044DCFE /* Dialog */,
@@ -1247,8 +1265,10 @@
 		AC46FEA8200F477E001B5FE4 /* Picker */ = {
 			isa = PBXGroup;
 			children = (
-				AC46FEA9200F477E001B5FE4 /* PickerModule.h */,
-				AC46FEAA200F477E001B5FE4 /* PickerModule.m */,
+				6006CC8F201F1755004AB8A5 /* PickerModule.h */,
+				6006CC90201F1756004AB8A5 /* PickerModule.m */,
+				6006CC8C201F0626004AB8A5 /* PickerViewModule.h */,
+				6006CC8D201F0626004AB8A5 /* PickerViewModule.m */,
 			);
 			path = Picker;
 			sourceTree = "<group>";
@@ -1256,10 +1276,8 @@
 		AC46FED0200F47DC001B5FE4 /* Picker */ = {
 			isa = PBXGroup;
 			children = (
-				AC46FED1200F4801001B5FE4 /* RNDatePickView.h */,
-				AC46FED4200F4810001B5FE4 /* RNDatePickView.m */,
-				AC46FED2200F4806001B5FE4 /* RNPickView.h */,
-				AC46FED3200F480C001B5FE4 /* RNPickView.m */,
+				6006CC87201F05B2004AB8A5 /* BzwPicker.h */,
+				6006CC89201F05B4004AB8A5 /* BzwPicker.m */,
 			);
 			path = Picker;
 			sourceTree = "<group>";
@@ -1816,8 +1834,8 @@
 				6027A437200D9CD00044DCFE /* Reusable.swift in Sources */,
 				6027A416200D9CD00044DCFE /* ProgressBarManager.swift in Sources */,
 				6027A45A200D9CD00044DCFE /* ReactNativeEventEmitter.swift in Sources */,
-				AC46FECF200F477E001B5FE4 /* PickerModule.m in Sources */,
 				6027A44E200D9CD00044DCFE /* NetworkModule.swift in Sources */,
+				6006CC8E201F0627004AB8A5 /* PickerViewModule.m in Sources */,
 				6027A430200D9CD00044DCFE /* NSString+UnicharUtilities.m in Sources */,
 				6027A42A200D9CD00044DCFE /* NavigationController.swift in Sources */,
 				6027A448200D9CD00044DCFE /* NotificationModule.m in Sources */,
@@ -1842,14 +1860,15 @@
 				6027A447200D9CD00044DCFE /* ImageCacheModule.m in Sources */,
 				6027A41C200D9CD00044DCFE /* LocationUtility.swift in Sources */,
 				6027A428200D9CD00044DCFE /* ScreenAdapter.swift in Sources */,
+				6006CC91201F1757004AB8A5 /* PickerModule.m in Sources */,
 				6027A41E200D9CD00044DCFE /* CameraUtility.swift in Sources */,
+				6006CC8B201F05B4004AB8A5 /* BzwPicker.m in Sources */,
 				6027A449200D9CD00044DCFE /* NotificationModule.swift in Sources */,
 				6027A445200D9CD00044DCFE /* SandboxModule.m in Sources */,
 				6027A455200D9CD00044DCFE /* ReloadModule.m in Sources */,
-				AC46FED5200F4810001B5FE4 /* RNPickView.m in Sources */,
+				6006CC84201F058C004AB8A5 /* RNDatePickView.m in Sources */,
 				6027A443200D9CD00044DCFE /* PollingModule.m in Sources */,
 				6027A418200D9CD00044DCFE /* UIColor+Extension.swift in Sources */,
-				AC46FED6200F4810001B5FE4 /* RNDatePickView.m in Sources */,
 				6027A451200D9CD00044DCFE /* HotUpdate.swift in Sources */,
 				6027A42E200D9CD00044DCFE /* MaterialLoadingProgressBar.swift in Sources */,
 				6027A420200D9CD00044DCFE /* NotificationUtility.swift in Sources */,
@@ -1886,6 +1905,7 @@
 				6027A446200D9CD00044DCFE /* ImageCacheModule.swift in Sources */,
 				6027A419200D9CD00044DCFE /* UIButton+Extension.swift in Sources */,
 				6027A453200D9CD00044DCFE /* HotUpdateConfig.swift in Sources */,
+				6006CC85201F058C004AB8A5 /* RNPickView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

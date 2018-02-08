@@ -21,7 +21,7 @@ export default class OtherContainer extends React.Component {
     return (
       <View style={styles.container}>
         <Text style={styles.text}>{JSON.stringify(this.props.navigation.state.params)}</Text>
-        <Button title="go back" handlePress={() => {
+        <Button title="go back" onPress={() => {
           this.props.navigation.goBack();
         }} />
       </View>
